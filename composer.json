@@ -1,0 +1,24 @@
+{
+    "name": "andikaryanto/ci4common",
+    "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
+    "type": "library",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "4.0.x-dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andik Aryanto",
+            "email": "andik.aryantoo@gmail.com"
+        }
+    ],
+    "autoload": {
+		"psr-4": {
+			"Ci4Common\\": "src/"
+		}
+	},
+    "minimum-stability": "dev"
+}

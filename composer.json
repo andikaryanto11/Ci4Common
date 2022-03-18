@@ -1,5 +1,5 @@
 {
-    "name": "andikaryanto/ci4common",
+    "name": "andikaryanto11/ci4common",
     "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
     "type": "library",
     "require": {

@@ -19,6 +19,5 @@
 		"psr-4": {
 			"Ci4Common\\": "src/"
 		}
-	},
-    "minimum-stability": "dev"
+	}
 }

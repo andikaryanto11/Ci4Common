@@ -15,6 +15,22 @@ class SessionService implements SessionServiceInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function set($key, $value)
+    {
+        return SessionLib::set($key, $value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function remove($key)
+    {
+        return SessionLib::remove($key);
+    }
+
+    /**
      * @inheritDoc
      */
     public function setFlashdata($key, $message)

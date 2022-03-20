@@ -12,6 +12,24 @@ interface SessionServiceInterface
      */
     public function get($key);
 
+
+    /**
+     * Set Session By Key
+     *
+     * @param string $key
+     * @param mixed $key
+     * @return array
+     */
+    public function set($key, $value);
+
+    /**
+     * Remove Session By Key
+     *
+     * @param string $key
+     * @return array
+     */
+    public function remove($key);
+
     /**
      * Set Flash Session By Key
      *

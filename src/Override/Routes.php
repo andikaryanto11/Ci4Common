@@ -6,6 +6,8 @@ use Ci4Common\Libraries\RedirectLib;
 use Ci4Common\Responses\ResponseInterface;
 use Ci4Common\Services\ViewCollectionServiceInterface;
 use CodeIgniter\Router\RouteCollection;
+use CodeIgniter\Router\RouteCollectionInterface;
+use Config\Services;
 
 class Routes extends RouteCollection
 {
@@ -32,4 +34,75 @@ class Routes extends RouteCollection
             return $controllerReturn->go();
         }
     }
+
+	/**
+	 *
+	 * @param string $method
+	 * @param string $from
+	 * @param string $controllerName
+	 * @param array|null $options
+	 * @return RouteCollectionInterface
+	 */
+	private function doRoute(string $method, string $from, $controllerName, array $options = null) : RouteCollectionInterface
+	{
+		$containerBuilder = Services::container(false);
+		$routes = $this;
+		$controllerNameAndFunction = explode(':', $controllerName);
+		$strController = $controllerNameAndFunction[0];
+		$fn = $controllerNameAndFunction[1];
+		$request = service('request');
+		$callback = function (...$parameters) use ($containerBuilder, $strController, $fn, $request, $routes) {
+			return $routes->willReturn($containerBuilder->get($strController)->$fn($request, ...$parameters));
+		};
+		return parent::$method($from, $callback, $options);
+	}
+
+	/**
+	 * @param string $from
+	 * @param string $controllerName
+	 * @param array|null $options
+	 * @return RouteCollectionInterface
+	 */
+	public function get(string $from, $to, array $options = null): RouteCollectionInterface
+	{
+		return $this->doRoute('get', $from, $to, $options);
+
+	}
+
+	/**
+	 * @param string $from
+	 * @param string $controllerName
+	 * @param array|null $options
+	 * @return RouteCollectionInterface
+	 */
+	public function post(string $from, $to, array $options = null): RouteCollectionInterface
+	{
+		return $this->doRoute('post', $from, $to, $options);
+
+	}
+
+
+	/**
+	 * @param string $from
+	 * @param string $controllerName
+	 * @param array|null $options
+	 * @return RouteCollectionInterface
+	 */
+	public function put(string $from, $to, array $options = null): RouteCollectionInterface
+	{
+		return $this->doRoute('put', $from, $to, $options);
+
+	}
+
+	/**
+	 * @param string $from
+	 * @param string $controllerName
+	 * @param array|null $options
+	 * @return RouteCollectionInterface
+	 */
+	public function delete(string $from, $to, array $options = null): RouteCollectionInterface
+	{
+		return $this->doRoute('delete', $from, $to, $options);
+
+	}
 }

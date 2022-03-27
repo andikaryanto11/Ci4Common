@@ -3,7 +3,9 @@
     "description": "Contains common class that can be used in Ci4 dependency injection of symfony",
     "type": "library",
     "require": {
-        "php": ">=7.4"
+        "php": ">=7.4",
+        "symfony/dependency-injection": "^5.4"
+        
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "4.0.x-dev"

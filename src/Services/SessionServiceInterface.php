@@ -37,4 +37,11 @@ interface SessionServiceInterface
      * @param array $message
      */
     public function setFlashdata($key, $message);
+
+	/**
+	 * Set user id
+	 * @param mixed $value
+	 * @return void
+	 */
+	public function setUserId($value);
 }

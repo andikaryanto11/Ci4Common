@@ -3,6 +3,7 @@
 namespace Ci4Common\Services;
 
 use Ci4Common\Libraries\SessionLib;
+use Ci4Common\Override\Session;
 
 class SessionService implements SessionServiceInterface
 {
@@ -37,4 +38,13 @@ class SessionService implements SessionServiceInterface
     {
         SessionLib::setFlashdata($key, $message);
     }
+
+	/**
+	 *
+	 * @inheritDoc
+	 */
+	public function setUserId($value)
+	{
+		SessionLib::set(Session::USER_FIELD_ID, $value);
+	}
 }

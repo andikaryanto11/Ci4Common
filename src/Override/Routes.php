@@ -45,15 +45,23 @@ class Routes extends RouteCollection
 	 */
 	private function doRoute(string $method, string $from, $controllerName, array $options = null) : RouteCollectionInterface
 	{
-		$containerBuilder = Services::container(false);
-		$routes = $this;
-		$controllerNameAndFunction = explode(':', $controllerName);
-		$strController = $controllerNameAndFunction[0];
-		$fn = $controllerNameAndFunction[1];
-		$request = service('request');
-		$callback = function (...$parameters) use ($containerBuilder, $strController, $fn, $request, $routes) {
-			return $routes->willReturn($containerBuilder->get($strController)->$fn($request, ...$parameters));
-		};
+		if(!is_callable($controllerName)){
+			$containerBuilder = Services::container(false);
+			$routes = $this;
+			$controllerNameAndFunction = explode(':', $controllerName);
+			if(count($controllerNameAndFunction) == 2){
+				$strController = $controllerNameAndFunction[0];
+				$fn = $controllerNameAndFunction[1];
+				$request = service('request');
+				$callback = function (...$parameters) use ($containerBuilder, $strController, $fn, $request, $routes) {
+					return $routes->willReturn($containerBuilder->get($strController)->$fn($request, ...$parameters));
+				};
+			} else {
+				$callback  = $controllerName;
+			}
+		} else {
+			$callback  = $controllerName;
+		}
 		return parent::$method($from, $callback, $options);
 	}
 

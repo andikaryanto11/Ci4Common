@@ -33,6 +33,6 @@ class RedirectLib
 
     public function go()
     {
-        return redirect()->to(baseUrl($this->route));
+        return redirect()->to(base_url($this->route));
     }
 }

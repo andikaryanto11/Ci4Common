@@ -27,4 +27,9 @@ class SessionLib
         $newkey = CommonLib::encryptMd5(CommonLib::getKey() . $key);
         session()->setFlashdata($newkey, $message);
     }
+
+    public static function destroy()
+    {
+        session()->destroy();
+    }
 }
